@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>🧾 Order History</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00796b;
+            margin-bottom: 30px;
+        }
+
+        .filter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-form label {
+            font-weight: 600;
+        }
+
+        .filter-form input[type="date"] {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .filter-form button {
+            padding: 8px 16px;
+            background-color: #009688;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-form button:hover {
+            background-color: #00796b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        thead {
+            background-color: #00796b;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 18px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f8f9;
+        }
+
+        tr:hover {
+            background-color: #e0f2f1;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .btn-invoice {
+            padding: 6px 12px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-invoice:hover {
+            background-color: #e65100;
+        }
+
+        @media (max-width: 768px) {
+            .filter-form {
+                flex-direction: column;
+            }
+
+            table, thead, tbody, th, td, tr {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>📜 Order History</h2>
+
+<form class="filter-form" th:action="@{/orders/filter}" method="get">
+    <label>From:</label>
+    <input type="date" name="start" th:value="${start}" required />
+    <label>To:</label>
+    <input type="date" name="end" th:value="${end}" required />
+    <button type="submit">🔍 Filter</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Invoice</th>
+            <th>Items</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">1</td>
+            <td th:text="${order.customerName}">Aman</td>
+            <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">Date</td>
+            <td>
+                <a th:href="@{'/orders/invoice/' + ${order.id}}" class="btn-invoice">🧾 PDF</a>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="item : ${order.items}"
+                        th:text="|${item.productName} x ${item.quantity} = ₹${item.price}|">
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div style="margin-top: 30px;">  <a href="/dashboard" class="btn" style="margin-right: 15px;">Back to Dashboard</a>  </divstyle="margin-top: 30px;">
+
+</body>
+</html>

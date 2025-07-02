@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>📦 Product List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f1f8e9, #ffffff);
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 14px;
+            margin: 5px 5px 10px 0;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            background-color: #66bb6a;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #388e3c;
+        }
+
+        .btn.delete {
+            background-color: #ef5350;
+        }
+
+        .btn.delete:hover {
+            background-color: #c62828;
+        }
+
+        .btn.search {
+            background-color: #42a5f5;
+        }
+
+        .btn.search:hover {
+            background-color: #1976d2;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 220px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 20px;
+        }
+
+        thead {
+            background-color: #388e3c;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        tbody tr {
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+        }
+
+        tbody td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        tbody td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .low-stock {
+            color: #e53935;
+            font-weight: bold;
+        }
+
+        .ok-stock {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .message {
+            color: green;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                font-size: 14px;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>📋 Product Management</h2>
+
+<h4 th:if="${keyword}">🔍 Results for: <b th:text="${keyword}"></b></h4>
+
+<!-- Search Form -->
+<form th:action="@{/products/search}" method="get">
+    <input type="text" name="keyword" placeholder="Search by name..." th:value="${keyword}" />
+    <button type="submit" class="btn search">🔍 Search</button>
+    <a href="/products/add" class="btn">➕ Add Product</a>
+</form>
+
+
+    
+
+
+<!-- Success Message -->
+<p class="message" th:if="${message}" th:text="${message}"></p>
+
+<!-- Product Table -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price (₹)</th>
+            <th>Stock</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">1</td>
+            <td th:text="${product.name}">Product Name</td>
+            <td th:text="${product.description}">Description</td>
+            <td th:text="${product.price}">0.00</td>
+            <td th:text="${product.stock}">0</td>
+            <td>
+                <span th:if="${product.stock <= 5}" class="low-stock">⚠️ Low Stock</span>
+                <span th:if="${product.stock > 5}" class="ok-stock">✔️ In Stock</span>
+            </td>
+            <td>
+                <a th:href="@{'/products/edit/' + ${product.id}}" class="btn">✏️ Edit</a>
+                <a th:href="@{'/products/delete/' + ${product.id}}" 
+                   onclick="return confirm('Are you sure to delete?')" 
+                   class="btn delete">🗑️ Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="margin-top: 30px;">  <a href="/dashboard" class="btn" style="margin-right: 15px;">Back to Dashboard</a>  </divstyle="margin-top: 30px;">
+
+
+</body>
+</html>

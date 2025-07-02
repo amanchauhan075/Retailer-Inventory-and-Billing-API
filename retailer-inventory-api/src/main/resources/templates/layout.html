@@ -1,0 +1,26 @@
+<!-- src/main/resources/templates/layout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:replace="${title}">Retailer App</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
+        <h1>🛒 Retailer Inventory & Billing</h1>
+        <nav>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/products}">Products</a>
+            <a th:href="@{/orders}">Orders</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+
+    <main th:replace="${content}">Main content here</main>
+
+    <footer>
+        <p>© 2025 Retailer System</p>
+    </footer>
+</body>
+</html>

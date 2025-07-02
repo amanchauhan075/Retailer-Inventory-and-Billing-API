@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Retailer Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f8;
+        }
+
+        header {
+            background-color: rgb(0, 128, 192);
+            color: white;
+            padding: 20px 30px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .metric-box {
+            flex: 1 1 250px;
+            background-color: #e9f5ff;
+            border: 1px solid #cce5ff;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .metric-box h2, .metric-box h3 {
+            margin: 10px 0;
+            color: rgb(0, 128, 192);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn.large {
+            background-color: rgb(0, 128, 192);
+            color: white;
+            padding: 16px 28px;
+            font-size: 16px;
+            flex: 1 1 200px;
+        }
+
+        .btn.large:hover {
+            background-color: rgb(0, 128, 192);
+        }
+
+        .btn.logout {
+            background-color: #dc3545;
+            color: white;
+            padding: 12px 22px;
+            font-size: 14px;
+            flex: 1 1 140px;
+        }
+
+        .btn.logout:hover {
+            background-color: #b02a37;
+        }
+
+        .alert {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid #ffeeba;
+            margin-top: 20px;
+        }
+
+        ul.low-stock-list {
+            color: #856404;
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .metric-box h2, .metric-box h3 {
+                font-size: 16px;
+            }
+
+            .btn.large {
+                font-size: 14px;
+                padding: 12px 16px;
+            }
+
+            .btn.logout {
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    🛒 Retailer Dashboard
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <div class="metrics">
+            <div class="metric-box">
+                <h2>Welcome, <span th:text="${retailerName}">Retailer</span> 👋</h2>
+                <h3>User: <span th:text="${username}">Retailer</span></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="btn-group">
+            <a th:href="@{/products}" class="btn large">📦 Manage Products</a>
+            <a th:href="@{/orders}" class="btn large">📜 Order History</a>
+            <a th:href="@{/orders/offline}" class="btn large">🧾 Place Offline Order</a>
+            <a th:href="@{/logout}" class="btn logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    <div th:if="${lowStockProducts != null and lowStockProducts.size() > 0}" class="alert">
+        ⚠️ Low Stock Alert! Check the following products:
+        <ul class="low-stock-list">
+            <li th:each="p : ${lowStockProducts}" th:text="${p.name + ' (Stock: ' + p.stock + ')'}"></li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
