@@ -8,16 +8,16 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #e8f5e9, #ffffff);
+            background-color: #f4f6f8;
             padding: 20px;
             color: #333;
         }
 
         h2, h3 {
             text-align: center;
-            color: #2e7d32;
+            color: #2c3e50;
             user-select: none;
-            pointer-events: none;
+            cursor: default;
         }
 
         form {
@@ -33,13 +33,12 @@
             font-weight: bold;
             margin-bottom: 5px;
             display: inline-block;
-            color: #2c3e50;
             user-select: none;
-            pointer-events: none;
+            cursor: default;
         }
 
         input[type="text"], input[type="number"] {
-            padding: 10px;
+            padding: 8px 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -53,6 +52,7 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
+            cursor: default;
         }
 
         .product-entry input {
@@ -64,11 +64,11 @@
             font-weight: bold;
             color: #444;
             user-select: none;
-            pointer-events: none;
+            cursor: default;
         }
 
         button[type="button"], button[type="submit"] {
-            background-color: #4caf50;
+            background-color: #3498db;
             color: #fff;
             border: none;
             padding: 10px 16px;
@@ -79,7 +79,7 @@
         }
 
         button:hover {
-            background-color: #388e3c;
+            background-color: #2c80b4;
         }
 
         .btn-remove {
@@ -93,10 +93,10 @@
         #grandTotal {
             margin-top: 20px;
             font-size: 1.2em;
-            color: #2e7d32;
+            color: #27ae60;
             font-weight: bold;
             user-select: none;
-            pointer-events: none;
+            cursor: default;
         }
 
         hr {
@@ -111,6 +111,7 @@
             margin-top: 20px;
             background-color: #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: default;
         }
 
         th, td {
@@ -118,11 +119,11 @@
             border: 1px solid #ddd;
             text-align: center;
             user-select: none;
-            pointer-events: none;
+            cursor: default;
         }
 
         th {
-            background-color: #66bb6a;
+            background-color: #3498db;
             color: white;
         }
 
@@ -138,19 +139,19 @@
             text-align: center;
         }
 
-        /* ✨ Cursor Fix for all text elements */
-        h1, h2, h3, label, span, th, td {
-            user-select: none;
-            pointer-events: none;
+        /* Final universal fix for cursor glitch */
+        body, form, div, span, h1, h2, h3, h4, h5, h6, label, table, th, td, tr {
             cursor: default;
+            user-select: none;
         }
 
-        button, input, select, textarea {
-            pointer-events: auto;
-        }
-
-        input[type="text"], input[type="number"] {
+        input, textarea {
             cursor: text;
+            user-select: text;
+        }
+
+        button {
+            cursor: pointer;
         }
     </style>
 
@@ -242,6 +243,7 @@
 
     <hr>
 
+    <!-- Show Summary Table After Order -->
     <table th:if="${items != null}">
         <thead>
             <tr>
