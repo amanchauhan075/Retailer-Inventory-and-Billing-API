@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -38,7 +40,12 @@ public class DashboardController {
         model.addAttribute("username", username);
         model.addAttribute("retailerName", realName);
 
+        // ✅ Add current date and time
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy | hh:mm a");
+        String formattedDateTime = now.format(formatter);
+        model.addAttribute("currentDateTime", formattedDateTime);
+
         return "dashboard";
     }
-
 }

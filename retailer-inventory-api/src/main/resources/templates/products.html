@@ -3,10 +3,16 @@
 <head>
     <title>📦 Product List</title>
     <style>
+        * {
+            user-select: none !important;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(to right, #f1f8e9, #ffffff);
             padding: 30px;
+            margin: 0;
+            cursor: default;
         }
 
         h2 {
@@ -17,14 +23,18 @@
 
         .btn {
             text-decoration: none;
-            padding: 8px 14px;
-            margin: 5px 5px 10px 0;
+            padding: 10px 18px;
+            margin: 5px 8px 10px 0;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: bold;
             background-color: #66bb6a;
             color: white;
             transition: background-color 0.3s ease;
+            font-size: 14px;
+            display: inline-block;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -53,6 +63,8 @@
             border: 1px solid #ccc;
             border-radius: 6px;
             margin-right: 10px;
+            pointer-events: auto;
+            cursor: text;
         }
 
         table {
@@ -60,6 +72,7 @@
             border-collapse: separate;
             border-spacing: 0 10px;
             margin-top: 20px;
+            cursor: default;
         }
 
         thead {
@@ -104,6 +117,10 @@
             margin-top: 10px;
         }
 
+        h4, .message {
+            user-select: none;
+        }
+
         @media (max-width: 768px) {
             table, thead, tbody, th, td, tr {
                 font-size: 14px;
@@ -117,6 +134,7 @@
             .btn {
                 width: 100%;
                 margin-bottom: 10px;
+                text-align: center;
             }
         }
     </style>
@@ -133,10 +151,6 @@
     <button type="submit" class="btn search">🔍 Search</button>
     <a href="/products/add" class="btn">➕ Add Product</a>
 </form>
-
-
-    
-
 
 <!-- Success Message -->
 <p class="message" th:if="${message}" th:text="${message}"></p>
@@ -167,16 +181,18 @@
             </td>
             <td>
                 <a th:href="@{'/products/edit/' + ${product.id}}" class="btn">✏️ Edit</a>
-                <a th:href="@{'/products/delete/' + ${product.id}}" 
-                   onclick="return confirm('Are you sure to delete?')" 
+                <a th:href="@{'/products/delete/' + ${product.id}}"
+                   onclick="return confirm('Are you sure to delete?')"
                    class="btn delete">🗑️ Delete</a>
             </td>
         </tr>
     </tbody>
 </table>
 
-<div style="margin-top: 30px;">  <a href="/dashboard" class="btn" style="margin-right: 15px;">Back to Dashboard</a>  </divstyle="margin-top: 30px;">
-
+<!-- Back to Dashboard -->
+<div style="margin-top: 30px;">
+    <a href="/dashboard" class="btn" style="margin-right: 15px;">⬅️ Back to Dashboard</a>
+</div>
 
 </body>
 </html>

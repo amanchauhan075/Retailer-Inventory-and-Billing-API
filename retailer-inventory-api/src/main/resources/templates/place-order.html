@@ -16,6 +16,8 @@
         h2, h3 {
             text-align: center;
             color: #2c3e50;
+            user-select: none;
+            cursor: default;
         }
 
         form {
@@ -31,6 +33,8 @@
             font-weight: bold;
             margin-bottom: 5px;
             display: inline-block;
+            user-select: none;
+            cursor: default;
         }
 
         input[type="text"], input[type="number"] {
@@ -39,6 +43,7 @@
             border: 1px solid #ccc;
             border-radius: 6px;
             width: calc(100% - 20px);
+            cursor: text;
         }
 
         .product-entry {
@@ -47,6 +52,7 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 10px;
+            cursor: default;
         }
 
         .product-entry input {
@@ -57,6 +63,8 @@
             min-width: 120px;
             font-weight: bold;
             color: #444;
+            user-select: none;
+            cursor: default;
         }
 
         button[type="button"], button[type="submit"] {
@@ -87,6 +95,8 @@
             font-size: 1.2em;
             color: #27ae60;
             font-weight: bold;
+            user-select: none;
+            cursor: default;
         }
 
         hr {
@@ -101,12 +111,15 @@
             margin-top: 20px;
             background-color: #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: default;
         }
 
         th, td {
             padding: 12px;
             border: 1px solid #ddd;
             text-align: center;
+            user-select: none;
+            cursor: default;
         }
 
         th {
@@ -124,6 +137,21 @@
 
         .center {
             text-align: center;
+        }
+
+        /* Final universal fix for cursor glitch */
+        body, form, div, span, h1, h2, h3, h4, h5, h6, label, table, th, td, tr {
+            cursor: default;
+            user-select: none;
+        }
+
+        input, textarea {
+            cursor: text;
+            user-select: text;
+        }
+
+        button {
+            cursor: pointer;
         }
     </style>
 
@@ -215,7 +243,7 @@
 
     <hr>
 
-   
+    <!-- Show Summary Table After Order -->
     <table th:if="${items != null}">
         <thead>
             <tr>
