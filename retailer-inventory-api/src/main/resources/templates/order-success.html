@@ -3,11 +3,6 @@
 <head>
     <title>✅ Order Placed</title>
     <style>
-        * {
-            cursor: default !important;
-            user-select: none !important;
-        }
-
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f1f7fd;
@@ -72,19 +67,9 @@
     <p>Total Bill: ₹ <b th:text="${total}">0.00</b></p>
 
     <a th:href="@{'/orders/invoice/' + ${orderId}}" class="btn">⬇️ Download Invoice PDF</a>
-
     <br><br>
-
-    <!-- 🔔 New Fake Payment Button -->
-    <a th:href="@{'/payment?amount=' + ${total}}" class="btn">💳 Proceed to Payment</a>
-
-    <br><br>
-
     <a href="/orders" class="back-link">📜 View Order History</a>
-
-    <div style="margin-top: 30px;">
-        <a href="/dashboard" class="btn" style="margin-right: 15px;">Back to Dashboard</a>
-    </div>
+	<div style="margin-top: 30px;">  <a href="/dashboard" class="btn" style="margin-right: 15px;">Back to Dashboard</a>  </divstyle="margin-top: 30px;">
 
 </body>
 </html>

@@ -268,12 +268,6 @@ public class OrderController {
 
         return "order-history";
     }
-    @GetMapping("/payment")
-    public String showPaymentPage(@RequestParam("amount") double amount, Model model) {
-        model.addAttribute("amount", amount);
-        return "payment"; // It will load payment.html from templates
-    }
-
 
 
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>💳 Fake Payment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            margin: auto;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        form button {
+            padding: 12px 30px;
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Confirm Payment</h2>
+        <p>Total Amount: ₹<b th:text="${amount}">0.00</b></p>
+        <form th:action="@{/payment/process}" method="post">
+            <input type="hidden" name="amount" th:value="${amount}" />
+            <button type="submit">Pay Now (Fake)</button>
+        </form>
+    </div>
+</body>
+</html>
